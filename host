@@ -1,6 +1,6 @@
 #! /bin/bash
 
-function new {
+function create {
 
     echo "What is the name of the host?"
     read host_name
@@ -8,7 +8,7 @@ function new {
     if ( "$host_name" == "" ); then
         exit
     else
-        DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+        DIR="$( pwd )"
 
         host_name_dir = sed -r 's/ /_/g'
 
@@ -19,3 +19,5 @@ function new {
         popd
     fi
 }
+
+$@
