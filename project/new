@@ -1,0 +1,65 @@
+#! /bin/bash
+
+function new {
+    DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    
+    pushd $DIR
+
+    echo "# inventory file for production environment" > production
+    echo "# inventory file for staging environment" > staging
+    echo "# inventory file for development environment" > development
+    echo "# inventory file for local environment" > local
+
+    #Setup Group variable folders
+    mkdir group_vars
+    pushd group_vars
+    echo "Here we assign variables to particular groups" > README.md
+    echo "Use the folder named, all, to place default values that will be loaded into all groups" >> README.md
+        mkdir all
+        pushd all
+        echo "Default variables for all groups" > README.md
+        echo "---" > main.yml
+        popd
+    popd
+
+
+    #Setup host variable folders
+    mkdir host_vars
+    pushd host_vars
+    echo "Here is put variables for specific hosts" > README.md
+    echo "You should avoid using this unless you need it." >> README.md
+    echo "http://docs.ansible.com/ansible/latest/playbooks_best_practices.html#group-and-host-variables" >> README.md
+    popd
+
+    mkdir library
+    pushd library 
+    echo "If any custom modules, put them here (optional)" > README.md
+    popd
+
+    mkdir roles
+    pushd roles
+    echo "Here is where the roles are defined" > README.md
+    popd
+
+    mkdir module_utils
+    pushd module_utils
+    echo "If any custom module_utils to support modules, put them here (optional)" > README.md
+    popd
+    
+    mkdir filter_plugins
+    pushd filter_plugins
+    echo "If any custom filter plugins, put them here (optional)" > README.md
+    popd
+    
+    mkdir lookup_plugins
+    pushd lookup_plugins
+    echo "If any custom lookup plugins, put them here (optional)" > README.md
+    popd
+
+    echo "---" > site.yml
+    echo "# master playbook" >> site.yml
+    echo "# include other playbooks as shown below" >> site.yml
+    echo "# - include: webservers.yml"
+
+    popd
+}

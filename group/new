@@ -1,0 +1,21 @@
+#! /bin/bash
+
+function new {
+
+    echo "What is the name of the group?"
+    read group_name
+
+    if ( "$group_name" == "" ); then
+        exit
+    else
+        DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+        group_name_dir = sed -r 's/ /_/g'
+
+        mkdir -p $DIR/group_vars/$group_name_dir
+        pushd $DIR/group_vars/$group_name_dir
+        echo "Default variables for ${group_name} group" > README.md
+        echo "---" > main.yml
+        popd
+    fi
+}

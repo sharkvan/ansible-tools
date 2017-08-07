@@ -1,0 +1,79 @@
+#! /bin/bash
+
+function new {
+    DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    pushd $DIR
+
+    echo "What is the name of the new role?"
+    read role_name
+
+    if ( "$role_name" == "" ); then
+        exit
+    else
+        role_name_dir = sed -r 's/ /_/g'
+
+        mkdir -p roles/$role_name_dir
+        pushd roles/$role_name_dir
+
+        mkdir task
+        pushd task
+        echo "---" > main.yml      
+        echo "# tasks file can include smaller files if warranted" >> main.yml
+        popd
+
+        mkdir handlers#
+        pushd handlers
+        echo "---" > main.yml      
+        echo "# handlers file" >> main.yml
+        popd
+        
+        mkdir templates
+        pushd templates
+        echo "files for use with the template resource" > README.md
+        echo "ntp.conf.j2   <------- templates end in .j2" >> README.md
+        popd
+        
+        mkdir files
+        pushd files
+        echo "bar.txt  <-- files for use with the copy resource" > README.md
+        echo "foo.sh   <-- script files for use with the script resource" >> README.md
+        popd
+        
+        mkdir vars
+        pushd vars
+        echo "---" > main.yml
+        echo "# variables associated with this role" >> main.yml
+        popd
+        
+        mkdir defaults
+        pushd defaults
+        echo "---" > main.yml      
+        echo "# default lower priority variables for this role" >> main.yml
+        popd
+        
+        mkdir meta
+        pushd meta
+        echo "---" > main.yml
+        echo "# role dependencies" >> main.yml
+        popd
+        
+        mkdir library
+        pushd library
+        echo "# roles can also include custom modules" > README.md
+        popd
+        
+        mkdir module_utils
+        pushd module_utils 
+        echo "# roles can also include custom module_utils" > README.md
+        popd
+        
+        mkdir lookup_plugins
+        pushd lookup_plugins
+        echo "# other types of plugins, like lookup in this case" > README.md
+        popd
+
+        popd
+    fi
+
+    popd    
+}
