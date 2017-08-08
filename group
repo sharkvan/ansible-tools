@@ -5,18 +5,19 @@ function create {
     echo "What is the name of the group?"
     read group_name
 
-    if ( "$group_name" == "" ); then
-        exit
-    else
+    if [ -n "$group_name" ]; then
+        echo "Creating group: $group_name."
         DIR="$( pwd )"
 
-        group_name_dir = sed -r 's/ /_/g'
+        group_name_dir="$(echo "$group_name" | sed 's/ /_/g')"
 
         mkdir -p $DIR/group_vars/$group_name_dir
         pushd $DIR/group_vars/$group_name_dir
-        echo "Default variables for ${group_name} group" > README.md
+        echo "Default variables for $group_name group" > README.md
         echo "---" > main.yml
         popd
+    else
+        echo "No name given, so I will do nothing!"
     fi
 }
 

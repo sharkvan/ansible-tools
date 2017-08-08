@@ -5,18 +5,18 @@ function create {
     echo "What is the name of the host?"
     read host_name
 
-    if ( "$host_name" == "" ); then
-        exit
-    else
+    if [ -n "$host_name" ]; then
         DIR="$( pwd )"
 
-        host_name_dir = sed -r 's/ /_/g'
+        host_name_dir="$(echo "$host_name" | sed 's/ /_/g')"
 
         mkdir -p $DIR/host_vars/$host_name_dir
         pushd $DIR/host_vars/$host_name_dir
         echo "Default variables for ${host_name} host" > README.md
         echo "---" > main.yml
         popd
+    else
+        echo "No name given, so I will do nothing!"
     fi
 }
 
