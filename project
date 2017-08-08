@@ -59,7 +59,7 @@ function create {
     echo "---" > site.yml
     echo "# master playbook" >> site.yml
     echo "# include other playbooks as shown below" >> site.yml
-    echo "# - include: webservers.yml"
+    echo "# - include: webservers.yml" >> site.yml
 
     popd
 }
