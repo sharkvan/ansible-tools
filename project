@@ -13,12 +13,10 @@ function create {
     #Setup Group variable folders
     mkdir group_vars
     pushd group_vars
-    echo "Here we assign variables to particular groups" > README.md
-    echo "Use the folder named, all, to place default values that will be loaded into all groups" >> README.md
         mkdir all
         pushd all
-        echo "Default variables for all groups" > README.md
         echo "---" > main.yml
+        echo "# Default variables for all groups" > main.yml
         popd
     popd
 

@@ -13,8 +13,8 @@ function create {
         mkdir -p roles/$role_name_dir
         pushd roles/$role_name_dir
 
-        mkdir task
-        pushd task
+        mkdir tasks
+        pushd tasks
         echo "---" > main.yml      
         echo "# Tasks file can include smaller files if warranted" >> main.yml
         popd
